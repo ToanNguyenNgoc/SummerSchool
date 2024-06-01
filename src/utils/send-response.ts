@@ -7,3 +7,18 @@ export const sendResponseDetail = (attributes: any) => {
     meta: {}
   }
 }
+
+export const sendResponsePagination = (data, page: number, pageSize: number, total: number) => {
+  const pageCount = Math.ceil(total / pageSize)
+  return {
+    data,
+    meta: {
+      pagination: {
+        page,
+        pageSize,
+        pageCount,
+        total
+      }
+    }
+  }
+}

@@ -73,6 +73,12 @@
       "relation": "manyToOne",
       "target": "api::object-user.object-user",
       "inversedBy": "users"
+    },
+    "course_orders": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::course-order.course-order",
+      "mappedBy": "user"
     }
   }
 }

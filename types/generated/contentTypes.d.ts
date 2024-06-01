@@ -368,13 +368,13 @@ export interface ApiCourseCourse extends Schema.CollectionType {
     singularName: 'course';
     pluralName: 'courses';
     displayName: 'Course';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     name: Attribute.String;
-    description: Attribute.Text;
     image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Attribute.String;
     active: Attribute.Boolean & Attribute.DefaultTo<true>;
@@ -382,6 +382,12 @@ export interface ApiCourseCourse extends Schema.CollectionType {
       'api::course.course',
       'manyToOne',
       'api::teacher.teacher'
+    >;
+    content: Attribute.RichText;
+    course_orders: Attribute.Relation<
+      'api::course.course',
+      'manyToMany',
+      'api::course-order.course-order'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -394,6 +400,47 @@ export interface ApiCourseCourse extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::course.course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCourseOrderCourseOrder extends Schema.CollectionType {
+  collectionName: 'course_orders';
+  info: {
+    singularName: 'course-order';
+    pluralName: 'course-orders';
+    displayName: 'CourseOrder';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    user: Attribute.Relation<
+      'api::course-order.course-order',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    courses: Attribute.Relation<
+      'api::course-order.course-order',
+      'manyToMany',
+      'api::course.course'
+    >;
+    note: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::course-order.course-order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::course-order.course-order',
       'oneToOne',
       'admin::user'
     > &
@@ -890,6 +937,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'api::object-user.object-user'
     >;
+    course_orders: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::course-order.course-order'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -918,6 +970,7 @@ declare module '@strapi/types' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::course.course': ApiCourseCourse;
+      'api::course-order.course-order': ApiCourseOrderCourseOrder;
       'api::object-user.object-user': ApiObjectUserObjectUser;
       'api::teacher.teacher': ApiTeacherTeacher;
       'plugin::upload.file': PluginUploadFile;

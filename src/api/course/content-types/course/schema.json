@@ -4,7 +4,8 @@
   "info": {
     "singularName": "course",
     "pluralName": "courses",
-    "displayName": "Course"
+    "displayName": "Course",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,18 +15,16 @@
     "name": {
       "type": "string"
     },
-    "description": {
-      "type": "text"
-    },
     "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "title": {
       "type": "string"
@@ -39,6 +38,15 @@
       "relation": "manyToOne",
       "target": "api::teacher.teacher",
       "inversedBy": "courses"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "course_orders": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::course-order.course-order",
+      "mappedBy": "courses"
     }
   }
 }
