@@ -362,193 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiBlogBlog extends Schema.CollectionType {
-  collectionName: 'blogs';
-  info: {
-    singularName: 'blog';
-    pluralName: 'blogs';
-    displayName: 'Blog';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    thumbnail: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    content: Attribute.RichText;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::blog.blog', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::blog.blog', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface ApiCourseCourse extends Schema.CollectionType {
-  collectionName: 'courses';
-  info: {
-    singularName: 'course';
-    pluralName: 'courses';
-    displayName: 'Course';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    title: Attribute.String;
-    active: Attribute.Boolean & Attribute.DefaultTo<true>;
-    teacher: Attribute.Relation<
-      'api::course.course',
-      'manyToOne',
-      'api::teacher.teacher'
-    >;
-    content: Attribute.RichText;
-    course_orders: Attribute.Relation<
-      'api::course.course',
-      'manyToMany',
-      'api::course-order.course-order'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::course.course',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::course.course',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiCourseOrderCourseOrder extends Schema.CollectionType {
-  collectionName: 'course_orders';
-  info: {
-    singularName: 'course-order';
-    pluralName: 'course-orders';
-    displayName: 'CourseOrder';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    user: Attribute.Relation<
-      'api::course-order.course-order',
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    courses: Attribute.Relation<
-      'api::course-order.course-order',
-      'manyToMany',
-      'api::course.course'
-    >;
-    note: Attribute.Text;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::course-order.course-order',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::course-order.course-order',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiObjectUserObjectUser extends Schema.CollectionType {
-  collectionName: 'object_users';
-  info: {
-    singularName: 'object-user';
-    pluralName: 'object-users';
-    displayName: 'ObjectUser';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.Text;
-    users: Attribute.Relation<
-      'api::object-user.object-user',
-      'oneToMany',
-      'plugin::users-permissions.user'
-    >;
-    uid: Attribute.UID;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::object-user.object-user',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::object-user.object-user',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiTeacherTeacher extends Schema.CollectionType {
-  collectionName: 'teachers';
-  info: {
-    singularName: 'teacher';
-    pluralName: 'teachers';
-    displayName: 'Teacher';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    sex: Attribute.Boolean;
-    avatar: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    telephone: Attribute.Integer;
-    dateOfBirth: Attribute.Date;
-    courses: Attribute.Relation<
-      'api::teacher.teacher',
-      'oneToMany',
-      'api::course.course'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::teacher.teacher',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::teacher.teacher',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -985,6 +798,195 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiBlogBlog extends Schema.CollectionType {
+  collectionName: 'blogs';
+  info: {
+    singularName: 'blog';
+    pluralName: 'blogs';
+    displayName: 'Blog';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    thumbnail: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    content: Attribute.RichText;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::blog.blog', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::blog.blog', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCourseCourse extends Schema.CollectionType {
+  collectionName: 'courses';
+  info: {
+    singularName: 'course';
+    pluralName: 'courses';
+    displayName: 'Course';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    title: Attribute.String;
+    active: Attribute.Boolean & Attribute.DefaultTo<true>;
+    teacher: Attribute.Relation<
+      'api::course.course',
+      'manyToOne',
+      'api::teacher.teacher'
+    >;
+    content: Attribute.RichText;
+    course_orders: Attribute.Relation<
+      'api::course.course',
+      'manyToMany',
+      'api::course-order.course-order'
+    >;
+    startDate: Attribute.Date;
+    numberOfSessions: Attribute.BigInteger;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::course.course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::course.course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCourseOrderCourseOrder extends Schema.CollectionType {
+  collectionName: 'course_orders';
+  info: {
+    singularName: 'course-order';
+    pluralName: 'course-orders';
+    displayName: 'CourseOrder';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    user: Attribute.Relation<
+      'api::course-order.course-order',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    courses: Attribute.Relation<
+      'api::course-order.course-order',
+      'manyToMany',
+      'api::course.course'
+    >;
+    note: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::course-order.course-order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::course-order.course-order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiObjectUserObjectUser extends Schema.CollectionType {
+  collectionName: 'object_users';
+  info: {
+    singularName: 'object-user';
+    pluralName: 'object-users';
+    displayName: 'ObjectUser';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.Text;
+    users: Attribute.Relation<
+      'api::object-user.object-user',
+      'oneToMany',
+      'plugin::users-permissions.user'
+    >;
+    uid: Attribute.UID;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::object-user.object-user',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::object-user.object-user',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTeacherTeacher extends Schema.CollectionType {
+  collectionName: 'teachers';
+  info: {
+    singularName: 'teacher';
+    pluralName: 'teachers';
+    displayName: 'Teacher';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    sex: Attribute.Boolean;
+    avatar: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    telephone: Attribute.Integer;
+    dateOfBirth: Attribute.Date;
+    courses: Attribute.Relation<
+      'api::teacher.teacher',
+      'oneToMany',
+      'api::course.course'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::teacher.teacher',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::teacher.teacher',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -995,11 +997,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::blog.blog': ApiBlogBlog;
-      'api::course.course': ApiCourseCourse;
-      'api::course-order.course-order': ApiCourseOrderCourseOrder;
-      'api::object-user.object-user': ApiObjectUserObjectUser;
-      'api::teacher.teacher': ApiTeacherTeacher;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -1008,6 +1005,11 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::blog.blog': ApiBlogBlog;
+      'api::course.course': ApiCourseCourse;
+      'api::course-order.course-order': ApiCourseOrderCourseOrder;
+      'api::object-user.object-user': ApiObjectUserObjectUser;
+      'api::teacher.teacher': ApiTeacherTeacher;
     }
   }
 }

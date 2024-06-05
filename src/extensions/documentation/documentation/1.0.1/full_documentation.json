@@ -14,7 +14,7 @@
       "email": "contact-email@something.io",
       "url": "mywebsite.io"
     },
-    "x-generation-date": "2024-06-05T04:29:59.713Z"
+    "x-generation-date": "2024-06-05T04:48:06.569Z"
   },
   "servers": [
     {
@@ -923,6 +923,15 @@
                   ],
                   "example": "string or id"
                 }
+              },
+              "startDate": {
+                "type": "string",
+                "format": "date"
+              },
+              "numberOfSessions": {
+                "type": "string",
+                "pattern": "^\\d*$",
+                "example": "123456789"
               }
             }
           }
@@ -2412,6 +2421,15 @@
                                         }
                                       }
                                     },
+                                    "startDate": {
+                                      "type": "string",
+                                      "format": "date"
+                                    },
+                                    "numberOfSessions": {
+                                      "type": "string",
+                                      "pattern": "^\\d*$",
+                                      "example": "123456789"
+                                    },
                                     "createdAt": {
                                       "type": "string",
                                       "format": "date-time"
@@ -2539,6 +2557,15 @@
                 }
               }
             }
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "numberOfSessions": {
+            "type": "string",
+            "pattern": "^\\d*$",
+            "example": "123456789"
           },
           "createdAt": {
             "type": "string",
@@ -3934,6 +3961,15 @@
                                                         }
                                                       }
                                                     }
+                                                  },
+                                                  "startDate": {
+                                                    "type": "string",
+                                                    "format": "date"
+                                                  },
+                                                  "numberOfSessions": {
+                                                    "type": "string",
+                                                    "pattern": "^\\d*$",
+                                                    "example": "123456789"
                                                   },
                                                   "createdAt": {
                                                     "type": "string",
@@ -5506,6 +5542,15 @@
                                                           }
                                                         }
                                                       }
+                                                    },
+                                                    "startDate": {
+                                                      "type": "string",
+                                                      "format": "date"
+                                                    },
+                                                    "numberOfSessions": {
+                                                      "type": "string",
+                                                      "pattern": "^\\d*$",
+                                                      "example": "123456789"
                                                     },
                                                     "createdAt": {
                                                       "type": "string",
@@ -7331,6 +7376,15 @@
                               }
                             }
                           }
+                        },
+                        "startDate": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "numberOfSessions": {
+                          "type": "string",
+                          "pattern": "^\\d*$",
+                          "example": "123456789"
                         },
                         "createdAt": {
                           "type": "string",
