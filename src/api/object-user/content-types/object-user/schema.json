@@ -4,7 +4,8 @@
   "info": {
     "singularName": "object-user",
     "pluralName": "object-users",
-    "displayName": "ObjectUser"
+    "displayName": "ObjectUser",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,6 +20,9 @@
       "relation": "oneToMany",
       "target": "plugin::users-permissions.user",
       "mappedBy": "object_user"
+    },
+    "uid": {
+      "type": "uid"
     }
   }
 }

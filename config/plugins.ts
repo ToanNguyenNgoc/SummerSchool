@@ -1,5 +1,5 @@
 export default () => ({
-  documentation: {
+  'documentation': {
     enabled: true,
     config: {
       openapi: '3.0.0',
@@ -29,5 +29,11 @@ export default () => ({
         },
       ],
     },
-  }
+  },
+  // 'import-export-entries': {
+  //   enabled: true,
+  //   config: {
+  //     // See `Config` section.
+  //   },
+  // },
 });
