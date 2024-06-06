@@ -8,15 +8,20 @@ export default factories.createCoreController('api::object-user.object-user', ({
     try {
       const requestBody = ctx.request.body;
       const objectUser = await strapi.entityService.findOne('api::object-user.object-user', requestBody.objectUserId)
+      const knowledge = await strapi.entityService.findOne('api::knowledge.knowledge', requestBody.knowledge_id)
       if (!objectUser) {
         ctx.throw(400, "Object user not found");
+      }
+      if (!knowledge) {
+        ctx.throw(400, "Knowledge user not found")
       }
       const newCustomer = await strapi.entityService.create('plugin::users-permissions.user', {
         data: {
           ...requestBody,
           provider: 'local',
           confirmed: true,
-          object_user: objectUser.id
+          object_user: objectUser.id,
+          knowledge: knowledge.id
         },
       });
       ctx.body = newCustomer;
@@ -30,7 +35,7 @@ export default factories.createCoreController('api::object-user.object-user', ({
       const user = await strapi.entityService.findOne(
         'plugin::users-permissions.user',
         user_id,
-        { 'populate': 'object_user', 'fields': '*' }
+        { 'populate': '*', 'fields': '*' }
       );
       return sendResponseDetail(omit(user, ['password']))
     } catch (error) {

@@ -79,6 +79,12 @@
       "relation": "oneToMany",
       "target": "api::course-order.course-order",
       "mappedBy": "user"
+    },
+    "knowledge": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::knowledge.knowledge",
+      "inversedBy": "users"
     }
   }
 }

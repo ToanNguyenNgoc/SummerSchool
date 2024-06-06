@@ -781,6 +781,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'oneToMany',
       'api::course-order.course-order'
     >;
+    knowledge: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'manyToOne',
+      'api::knowledge.knowledge'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -910,6 +915,41 @@ export interface ApiCourseOrderCourseOrder extends Schema.CollectionType {
   };
 }
 
+export interface ApiKnowledgeKnowledge extends Schema.CollectionType {
+  collectionName: 'knowledges';
+  info: {
+    singularName: 'knowledge';
+    pluralName: 'knowledges';
+    displayName: 'Knowledge';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    users: Attribute.Relation<
+      'api::knowledge.knowledge',
+      'oneToMany',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::knowledge.knowledge',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::knowledge.knowledge',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiObjectUserObjectUser extends Schema.CollectionType {
   collectionName: 'object_users';
   info: {
@@ -1008,6 +1048,7 @@ declare module '@strapi/types' {
       'api::blog.blog': ApiBlogBlog;
       'api::course.course': ApiCourseCourse;
       'api::course-order.course-order': ApiCourseOrderCourseOrder;
+      'api::knowledge.knowledge': ApiKnowledgeKnowledge;
       'api::object-user.object-user': ApiObjectUserObjectUser;
       'api::teacher.teacher': ApiTeacherTeacher;
     }
