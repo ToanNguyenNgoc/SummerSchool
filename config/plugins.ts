@@ -30,10 +30,14 @@ export default () => ({
       ],
     },
   },
-  // 'import-export-entries': {
-  //   enabled: true,
-  //   config: {
-  //     // See `Config` section.
-  //   },
-  // },
+  'import-export-entries': {
+    enabled: true,
+    config: {
+      // See `Config` section.
+      enableExport: true,
+      // enableImport:true,
+      allowedCollections: ['*'], // Allow exporting from all collections
+      exportFormat: 'json', // Ensure the export format is JSON
+    },
+  },
 });
