@@ -786,6 +786,8 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'api::knowledge.knowledge'
     >;
+    avatar: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    fullName: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -856,6 +858,7 @@ export interface ApiCourseCourse extends Schema.CollectionType {
     >;
     startDate: Attribute.Date;
     numberOfSessions: Attribute.BigInteger;
+    endDate: Attribute.Date;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

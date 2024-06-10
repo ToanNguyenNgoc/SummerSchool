@@ -85,6 +85,19 @@
       "relation": "manyToOne",
       "target": "api::knowledge.knowledge",
       "inversedBy": "users"
+    },
+    "avatar": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "fullName": {
+      "type": "string"
     }
   }
 }

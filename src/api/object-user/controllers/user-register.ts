@@ -1,6 +1,7 @@
 import { factories } from '@strapi/strapi';
 import { sendResponseDetail } from '../../../utils';
-import { omit } from 'lodash';
+import { identity, omit, pickBy } from 'lodash';
+import { UserRegisterDTO } from '../dto';
 
 
 export default factories.createCoreController('api::object-user.object-user', ({ strapi }) => ({
@@ -15,13 +16,26 @@ export default factories.createCoreController('api::object-user.object-user', ({
       if (!knowledge) {
         ctx.throw(400, "Knowledge user not found")
       }
+      let media
+      if (requestBody.media_id) {
+        media = await strapi.entityService.findOne('plugin::upload.file', requestBody.media_id)
+        if (!media) {
+          ctx.throw(400, "Media not found")
+        }
+      }
+      const user = new UserRegisterDTO()
+      user.email = requestBody.email
+      user.fullName = requestBody.fullName
+      user.password = requestBody.password
+      user.username = requestBody.username
       const newCustomer = await strapi.entityService.create('plugin::users-permissions.user', {
         data: {
-          ...requestBody,
+          ...user,
           provider: 'local',
           confirmed: true,
           object_user: objectUser.id,
-          knowledge: knowledge.id
+          knowledge: knowledge.id,
+          avatar: media
         },
       });
       ctx.body = newCustomer;
@@ -41,6 +55,33 @@ export default factories.createCoreController('api::object-user.object-user', ({
     } catch (error) {
       ctx.throw(400, error.message);
     }
-
+  },
+  async updateProfile(ctx) {
+    try {
+      const user_id = ctx.user_id
+      const body = ctx.request.body
+      let media
+      if (body.media_id) {
+        media = await strapi.entityService.findOne('plugin::upload.file', body.media_id)
+        if (!media) {
+          ctx.throw(400, "Media not found")
+        }
+      }
+      const data = {
+        fullName: body.fullName,
+        username: body.username,
+        email: body.email,
+        dateOfBirth: body.dateOfBirth,
+        objectUserId: body.objectUserId,
+        knowledge_id: body.knowledge_id,
+        avatar: media
+      }
+      const user = await strapi.entityService.update('plugin::users-permissions.user', user_id, {
+        data: pickBy(data, identity())
+      })
+      return sendResponseDetail(user)
+    } catch (error) {
+      ctx.throw(400, error.message);
+    }
   }
 }));

@@ -53,6 +53,9 @@
     },
     "numberOfSessions": {
       "type": "biginteger"
+    },
+    "endDate": {
+      "type": "date"
     }
   }
 }

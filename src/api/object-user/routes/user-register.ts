@@ -18,5 +18,13 @@ export default {
         middlewares: ['global::user-middleware'],
       },
     },
+    {
+      method: 'POST',
+      path: '/user-profile',
+      handler: 'user-register.updateProfile',
+      config: {
+        middlewares: ['global::user-middleware'],
+      },
+    },
   ],
 };
