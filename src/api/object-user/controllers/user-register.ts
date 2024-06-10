@@ -67,13 +67,23 @@ export default factories.createCoreController('api::object-user.object-user', ({
           ctx.throw(400, "Media not found")
         }
       }
+      let objectUser
+      if (body.objectUserId) {
+        objectUser = await strapi.entityService.findOne('api::object-user.object-user', body.objectUserId)
+        if (!objectUser) ctx.throw(400, "Object user not found");
+      }
+      let knowledge
+      if (body.knowledge_id) {
+        knowledge = await strapi.entityService.findOne('api::knowledge.knowledge', body.knowledge)
+        if (!knowledge) ctx.throw(400, "Knowledge user not found");
+      }
       const data = {
         fullName: body.fullName,
         username: body.username,
         email: body.email,
         dateOfBirth: body.dateOfBirth,
-        objectUserId: body.objectUserId,
-        knowledge_id: body.knowledge_id,
+        object_user: objectUser,
+        knowledge: knowledge,
         avatar: media
       }
       const user = await strapi.entityService.update('plugin::users-permissions.user', user_id, {
