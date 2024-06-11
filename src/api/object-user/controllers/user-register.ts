@@ -28,6 +28,7 @@ export default factories.createCoreController('api::object-user.object-user', ({
       user.fullName = requestBody.fullName
       user.password = requestBody.password
       user.username = requestBody.username
+      user.dateOfBirth = requestBody.dateOfBirth
       const newCustomer = await strapi.entityService.create('plugin::users-permissions.user', {
         data: {
           ...user,
